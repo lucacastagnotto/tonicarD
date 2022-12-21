@@ -1,0 +1,1689 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Caronti Annotator</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!-- Bootstrap CSS -->
+		<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<!-- CSS -->
+		<link href="style.css" rel="stylesheet">
+	</head>
+	<body>
+		<!-- SVG list -->
+		<svg class="d-none">
+
+			<symbol id="next" viewBox="0 0 256 512">
+				<path
+					d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+				/>
+			</symbol>
+
+			<symbol id="prev" viewBox="0 0 256 512">
+				<path
+				d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+				/>
+			</symbol>
+			
+			<symbol id="x-circle" xmlns="http://www.w3.org/2000/svg" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+			  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+			</symbol>
+
+			<symbol id="check" xmlns="http://www.w3.org/2000/svg" fill="blue" class="bi bi-check-circle" viewBox="0 0 16 16">
+				<circle r="7" cx="8" cy="8" fill="rgb(0, 94, 255)" stroke="white"/>
+				<path fill="white" d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+			</symbol>
+
+			<svg id="bell" xmlns="http://www.w3.org/2000/svg" class="bi bi-bell-fill" viewBox="0 0 16 16">
+				<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+			</svg>
+
+			<symbol id="chevron-up" xmlns="http://www.w3.org/2000/svg" class="bi bi-chevron-up" viewBox="0 0 16 16">
+				<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+			</symbol>
+
+			<symbol id="chevron-down" xmlns="http://www.w3.org/2000/svg" class="bi bi-chevron-down" viewBox="0 0 16 16">
+				<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+			</symbol>
+
+			<symbol id="caret-down" xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+			  <path
+				d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+			</symbol>
+
+			<symbol id="caret-up" xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+			  <path
+				d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+			</symbol>
+
+			<symbol id="zoomin" xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-zoom-in" viewBox="0 0 16 16">
+				<path
+					fill-rule="evenodd"
+					d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+				<path d="M10.344 11.742c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1 6.538 6.538 0 0 1-1.398 1.4z"/>
+				<path fill-rule="evenodd" d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5z"/>
+			</symbol>
+
+			<symbol id="zoomout" xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-zoom-out" viewBox="0 0 16 16">
+				<path
+					fill-rule="evenodd"
+					d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+				<path d="M10.344 11.742c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1 6.538 6.538 0 0 1-1.398 1.4z"/>
+				<path fill-rule="evenodd" d="M3 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+			</symbol>
+
+			<symbol id="trash" xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-trash" viewBox="0 0 16 16">
+			  <path
+				d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+			  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+			</symbol>
+
+			<symbol id="pencil" xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-pencil" viewBox="0 0 16 16">
+			  <path
+				d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+			</symbol>
+
+			<symbol id="expand" xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+			  <path
+				fill-rule="evenodd"
+				d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+			</symbol>
+
+			<symbol id="contract" xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-arrows-angle-contract" viewBox="0 0 16 16">
+			  <path
+				fill-rule="evenodd"
+				d="M.172 15.828a.5.5 0 0 0 .707 0l4.096-4.096V14.5a.5.5 0 1 0 1 0v-3.975a.5.5 0 0 0-.5-.5H1.5a.5.5 0 0 0 0 1h2.768L.172 15.121a.5.5 0 0 0 0 .707zM15.828.172a.5.5 0 0 0-.707 0l-4.096 4.096V1.5a.5.5 0 1 0-1 0v3.975a.5.5 0 0 0 .5.5H14.5a.5.5 0 0 0 0-1h-2.768L15.828.879a.5.5 0 0 0 0-.707z"/>
+			</symbol>
+
+			<symbol id="focus" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 512 512">
+			  <path d="M64,496H184V464H64a16.019,16.019,0,0,1-16-16V328H16V448A48.054,48.054,0,0,0,64,496Z"/>
+			  <path d="M48,64A16.019,16.019,0,0,1,64,48H184V16H64A48.054,48.054,0,0,0,16,64V184H48Z"/>
+			  <path d="M448,16H328V48H448a16.019,16.019,0,0,1,16,16V184h32V64A48.054,48.054,0,0,0,448,16Z"/>
+			  <path d="M464,448a16.019,16.019,0,0,1-16,16H328v32H448a48.054,48.054,0,0,0,48-48V328H464Z"/>
+			  <path d="M400,256c0-79.4-64.6-144-144-144S112,176.6,112,256s64.6,144,144,144S400,335.4,400,256ZM256,368A112,112,0,1,1,368,256,112.127,112.127,0,0,1,256,368Z"/>
+			</symbol>
+
+			<symbol id="undo" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 512 512">
+				<path
+					d="M464,440l-28.12-32.11c-22.48-25.65-43.33-45.45-72.08-58.7-26.61-12.26-60-18.65-104.27-19.84V432L48,252,259.53,72V175.21c72.88,3,127.18,27.08,161.56,71.75C449.56,284,464,335.19,464,399.26Z"/>
+			</symbol>
+
+			<symbol id="redo" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 512 512">
+				<path
+					d="M48,399.26C48,335.19,62.44,284,90.91,247c34.38-44.67,88.68-68.77,161.56-71.75V72L464,252,252.47,432V329.35c-44.25,1.19-77.66,7.58-104.27,19.84-28.75,13.25-49.6,33.05-72.08,58.7L48,440Z"/>
+			</symbol>
+
+			<symbol id="reset" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 470.083 470.083">
+				<g>
+					<path
+						d="M434.961,270.163c0,110.241-89.684,199.92-199.923,199.92c-110.235,0-199.917-89.679-199.917-199.92
+						c0-36.44,9.915-72.129,28.658-103.178l52.163,31.487c-13.013,21.56-19.89,46.353-19.896,71.697
+						c0,76.64,62.35,138.985,138.985,138.985c76.642,0,138.989-62.346,138.989-138.985c0-73.864-57.961-134.275-130.759-138.566h-29.808
+						l25.1,63.541c0.843,2.128,0.16,4.558-1.669,5.932c-1.827,1.38-4.351,1.374-6.168-0.026l-124.806-95.965
+						c-1.25-0.966-1.989-2.444-1.989-4.037c0-1.584,0.739-3.074,1.989-4.037L230.724,1.052C231.64,0.346,232.727,0,233.824,0
+						c1.082,0,2.154,0.34,3.068,1.022c1.829,1.374,2.512,3.807,1.669,5.938l-25.1,63.534l21.586-0.254c7.72,0,33.325,2.598,37.545,3.591
+						C364.931,91.46,434.961,172.766,434.961,270.163z"/>
+				</g>
+			</symbol>
+
+		</svg>
+
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand navbar-dark bg-dark mb-3">
+			<div class="container-fluid">
+				<div class="navbar-collapse">
+					<div class="nav-item ms-5">
+						<a onclick="gotoHome()">Home</a>
+					</div>
+					<div id="openFile-btn" class="nav-item">
+						<input id="input_img" type="file" name="file" accept="image/*" class="d-none">
+						<label id="labelNewImg" for="input_img">Apri scheda</label>
+					</div>
+					<div class="nav-item ms-auto d-flex align-items-center">
+						<div id="notifications" class="bell me-5 p-2">
+							<svg fill="white" width="24" height="24">
+								<use href="#bell"/>
+								<span id="badge" class="position-absolute translate-middle p-1 bg-danger border rounded-circle collapse" style="top: 30%; left: 60%">
+								</span>
+							</svg>
+							<div id="notify-container">
+								<div id="notify-box" class="collapse">
+									<div class="div-header">Notifiche</div>
+									<div class="empty text-center collapse show p-3">Nessuna notifica</div>
+									<div id="notifyList"></div>
+									<div id="notify-clear">INTERROMPI ANNOTAZIONI</div>
+								</div>
+							</div>
+						</div>
+						<input id="searchBar" name="allCards" type="search" autocomplete="off" placeholder="Cerca schede" class="form-control">
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div id="pageContent" class="container-fluid p-0">
+			
+			<!-- Home -->
+			<div id="home" class="container-fluid p-0 collapse">
+
+				<!-- Recents -->
+				<div id="recents" class="media-container collapse">
+					<div class="nav-categories d-flex">
+						<h3>Recenti</h3>
+						<div class="ms-auto">
+							<input name="recents" type="search" placeholder="Cerca tra Recenti" class="form-control filter">
+						</div>
+					</div>
+					<div class="media-wrap">
+						<div class="slide-wrap collapse">
+							<svg class="slide slide-left" fill="black">
+								<use href="#prev"></use>
+							</svg>
+						</div>
+						<div class="media-scroller">
+						</div>
+						<div class="slide-wrap collapse">
+							<svg class="slide slide-right" fill="black">
+								<use href="#next"></use>
+							</svg>
+						</div>
+					</div>
+					<!-- container Recenti -->
+				</div>
+
+				<!-- Not annotated -->
+				<div id="noAnn" class="media-container collapse">
+					<div class="nav-categories d-flex align-items-center">
+						<h3>Non annotate</h3>
+						<div class="form-check m-3">
+							<input class="form-check-input" type="checkbox" id="askGoogle" checked>
+							<label class="form-check-label" for="askGoogle">
+								Richiedi annotazione automatica
+							</label>
+						</div>
+						<button id="get10" type="button" class="ms-5">Seleziona 10 schede</button>
+						<div class="ms-auto">
+							<input name="noAnn" type="search" placeholder="Non annotate" class="form-control filter">
+						</div>
+					</div>
+					<div class="media-wrap">
+						<div class="slide-wrap collapse">
+							<svg class="slide slide-left" fill="black">
+								<use href="#prev"></use>
+							</svg>
+						</div>
+						<div class="media-scroller">
+						</div>
+						<div class="slide-wrap collapse">
+							<svg class="slide slide-right" fill="black">
+								<use href="#next"></use>
+							</svg>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center">
+						<button id="googleAnn-btn" class="btn btn-primary" type="submit" onclick="handleMultipleAPIReq()" disabled>Richiedi annotazione di 0 schede</button>
+						<button id="cancelSelection" class="btn btn-sm btn-danger collapse ms-2" type="button">Annulla selezione</button>
+					</div>
+					<!-- container Non annotati -->
+				</div>
+
+				<!-- Auto annotated -->
+				<div id="autoAnn" class="media-container collapse">
+					<div class="nav-categories d-flex">
+						<h3>Annotate automaticamente</h3>
+						<div class="ms-auto">
+							<input name="autoAnn" type="search" placeholder="Annotate automaticamente" class="form-control filter">
+						</div>
+					</div>
+					<div class="media-wrap">
+						<div class="slide-wrap collapse">
+							<svg class="slide slide-left" fill="black">
+								<use href="#prev"></use>
+							</svg>
+						</div>
+						<div class="media-scroller">
+						</div>
+						<div class="slide-wrap collapse">
+							<svg class="slide slide-right" fill="black">
+								<use href="#next"></use>
+							</svg>
+						</div>
+					</div>
+					<!-- container Auto annotati -->
+				</div>
+
+				<!-- Annotate manualmente -->
+				<div id="handAnn" class="media-container collapse">
+					<div class="nav-categories d-flex">
+						<h3>Annotate manualmente</h3>
+						<div class="ms-auto">
+							<input name="handAnn" type="search" placeholder="Annotate manualmente" class="form-control filter">
+						</div>
+					</div>
+					<div class="media-wrap">
+						<div class="slide-wrap collapse">
+							<svg class="slide slide-left" fill="black">
+								<use href="#prev"></use>
+							</svg>
+						</div>
+						<div class="media-scroller">
+						</div>
+						<div class="slide-wrap collapse">
+							<svg class="slide slide-right" fill="black">
+								<use href="#next"></use>
+							</svg>
+						</div>
+					</div>
+					<!-- container Auto annotati -->
+				</div>
+
+				<!-- Fine Home -->
+			</div>
+
+			<!-- Editing -->
+			<div id="editing" class="container-fluid p-0 collapse">
+
+				<div>
+					<h3 id="filename" class="text-center"></h3>
+				</div>
+				<div class="row ms-1">
+
+					<!-- column 1: card editing -->
+					<div class="col images">
+
+						<div id="editErr-msg" class="fade-out text-center">
+							Seleziona prima una box
+						</div>
+						<!-- Command Bar -->
+						<div id="command-bar">
+							<!-- Icons -->
+							<div id="icons">
+								<div class="svg-wrap" title="Zoom avanti" onclick="zoomIn()">
+									<svg class="icon">
+										<use href="#zoomin"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="Zoom indietro" onclick="zoomOut()">
+									<svg class="icon">
+										<use href="#zoomout"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="Cancella box" onclick="deleteBox()">
+									<svg class="icon">
+										<use href="#trash"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="Disegna nuova box" onclick="drawToggle()">
+									<svg class="icon">
+										<use href="#pencil"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="Ingrandisci box" onclick="resizeBox(true)">
+									<svg class="icon">
+										<use href="#expand"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="Riduci box" onclick="resizeBox(false)">
+									<svg class="icon">
+										<use href="#contract"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="Centra immagine" onclick="recenter()">
+									<svg class="icon">
+										<use href="#focus"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="UNDO" onclick="undo()">
+									<svg class="icon">
+										<use href="#undo"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="REDO" onclick="redo()">
+									<svg class="icon">
+										<use href="#redo"/>
+									</svg>
+								</div>
+								<div class="svg-wrap" title="Reset immagine e trascrizioni iniziali" onclick="setInitialState()">
+									<svg class="icon">
+										<use href="#reset"/>
+									</svg>
+								</div>
+							</div>
+							<!-- Shortcuts Keys -->
+							<div id="shortcuts">
+								<div class="key-grid span-2 collapse">
+									Rotella mouse
+								</div>
+								<div class="key-grid collapse">
+									Backspace
+								</div>
+								<div class="key-grid collapse">
+									
+								</div>
+								<div class="key-grid collapse">
+									+
+								</div>
+								<div class="key-grid collapse">
+									-
+								</div>
+								<div class="key-grid collapse">
+									F
+								</div>
+								<div id="key-undo" class="key-grid collapse">
+									Ctrl + Z
+								</div>
+								<div id="key-redo" class="key-grid collapse">
+									Ctrl + Y
+								</div>
+								<div class="key-grid collapse">
+									R
+								</div>
+							</div>
+							<!-- Shortcuts toggle -->
+							<button id="short-btn" type="button" class="btn d-flex align-items-center">
+								Shortcuts
+								<svg class="caret down">
+									<use href="#caret-down"/>
+								</svg>
+							</button>
+						</div>
+						
+						<!-- Canvas -->
+						<div id="editedImage">
+							<canvas id="editor"></canvas>
+						</div>
+					</div>
+
+					<!-- column 2: transcriptions -->
+					
+					<div class="col d-flex flex-column transcriptions">
+						<!-- button for autoAnn -->
+						<div id="startEditing" class="text-center collapse mb-3">
+							<button id="ask4Ann" type="button" class="btn btn-primary">Richiedi annotazione automatica</button>
+							<p style="font-size: 12px; font-weight: 500;">Oppure inizia a disegnare box di annotazione</p>
+						</div>
+						<!-- Textareas -->
+						<!-- Author Row -->
+						<div class="row box-rows">
+							<!-- Author label -->
+							<div class="col-3 d-flex align-items-center">
+								<div class="sel-hider collapse">
+									<select class="form-select">
+										<option value="author">Autore</option>
+										<option value="title">Titolo</option>
+										<option value="note">Note</option>
+										<option value="collocation">Collocazione</option>
+									</select>
+								</div>
+							</div>
+							<!-- Author textarea -->
+							<div class="col d-flex align-items-center">
+								<div class="ta-hider collapse">
+									<textarea type="text" id="author" name="author" rows="2" spellcheck="false" style="border-color: blue;"></textarea>
+								</div>
+							</div>
+						</div>
+						<!-- Title Row -->
+						<div class="row box-rows">
+							<!-- Title label -->
+							<div class="col-3 d-flex align-items-center">
+								<div class="sel-hider collapse">
+									<select class="form-select">
+										<option value="author">Autore</option>
+										<option value="title">Titolo</option>
+										<option value="note">Note</option>
+										<option value="collocation">Collocazione</option>
+									</select>
+								</div>
+							</div>
+							<!-- Title textarea -->
+							<div class="col d-flex align-items-center">
+								<div class="ta-hider collapse">
+									<textarea type="text" id="title" name="title" rows="4" spellcheck="false" style="border-color: red;"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<!-- Note Row -->
+						<div class="row box-rows">
+							<!-- Note label -->
+							<div class="col-3 d-flex align-items-center">
+								<div class="sel-hider collapse">
+									<select class="form-select">
+										<option value="author">Autore</option>
+										<option value="title">Titolo</option>
+										<option value="note">Note</option>
+										<option value="collocation">Collocazione</option>
+									</select>
+								</div>
+							</div>
+							<!-- Note textarea -->
+							<div class="col d-flex align-items-center">
+								<div class="ta-hider collapse">
+									<textarea type="text" id="note" name="note" rows="2" spellcheck="false" style="border-color: black;"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<!-- Collocation Row -->
+						<div class="row box-rows">
+							<!-- Collocation label -->
+							<div class="col-3 d-flex align-items-center">
+								<div class="sel-hider collapse">
+									<select class="form-select">
+										<option value="author">Autore</option>
+										<option value="title">Titolo</option>
+										<option value="note">Note</option>
+										<option value="collocation">Collocazione</option>
+									</select>
+								</div>
+							</div>
+							<!-- Collocation textarea -->
+							<div class="col d-flex align-items-center">
+								<div class="ta-hider collapse">
+									<textarea type="text" id="collocation" name="collocation" rows="1" spellcheck="false" style="border-color: green;"></textarea>
+								</div>
+							</div>
+						</div>
+						<!-- button to save results -->
+						<div class="row">
+							<div class="d-flex justify-content-center">
+								<button id="save-btn" type="button" class="btn btn-primary" onclick="saveData()">Salva annotazioni e torna in Home</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- searchPage -->
+			<div id="search" class="container-fluid p-0 collapse">
+				<div id="allCards" class="media-container collapse show">
+					<div class="nav-categories">
+						<h3 id="search-header"></h3>
+					</div>
+					<div class="media-wrap">
+						<div class="slide-wrap collapse">
+							<svg id="prev-recents" class="slide slide-left" fill="black">
+								<use href="#prev"></use>
+							</svg>
+						</div>
+						<div id="searchScroller" class="media-scroller">
+							<div id="searchErrDiv" class="errDiv collapse">Non ci sono schede che soddisfano la ricerca</div>
+						</div>
+						<div class="slide-wrap collapse">
+							<svg id="next-recent" class="slide slide-right" fill="black">
+								<use href="#next"></use>
+							</svg>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Toast -->
+			<div id="toast" class="toast align-items-center p-2" role="alert" aria-live="assertive" aria-atomic="true">
+			  <div class="d-flex">
+				<div id="toast-body"></div>
+				<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+			  </div>
+			</div>
+
+			<!-- End pageContent -->
+		</div>
+
+
+
+		<!-- Bootstrap JS -->
+		<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- JavaScript -->
+		<script type="text/javascript" src="javascript/quad.js"></script>
+		<script type="text/javascript" src="javascript/functions.js"></script>
+		<script type="text/javascript">
+
+			var arrows = document.getElementsByClassName("slide");
+			var inputBars = document.getElementsByClassName("filter");
+			var mediaScrollers = document.getElementsByClassName("media-scroller");
+			var selects = document.getElementsByClassName("form-select");
+			const navbar = document.querySelector(".navbar");
+			const searchBar = document.getElementById("searchBar");
+			const googleAnn_btn = document.getElementById("googleAnn-btn");
+			const cancelSelection_btn = document.getElementById("cancelSelection");
+			const get10Cards = document.getElementById("get10");
+			const notifications = document.getElementById("notifications");
+			const notifyBox = document.getElementById("notify-box");
+			const notifyList = document.getElementById("notifyList");
+			const notifyClear = document.getElementById("notify-clear");
+			const badge = document.getElementById("badge");
+			const recentsContainer = document.getElementById("recents");
+			const askGoogle = document.getElementById("askGoogle");
+			const inputFile = document.getElementById("input_img");
+			const myToast = document.getElementById("toast");
+			const toastBody = document.getElementById("toast-body");
+			const container_Recents = document.getElementById("recents");
+			const container_NoAnn = document.getElementById("noAnn");
+			const container_AutoAnn = document.getElementById("autoAnn");
+			const container_HandAnn = document.getElementById("handAnn");
+			const toggleShortcuts = document.getElementById("short-btn");
+
+			var recents = {
+				list: [],
+				index: 0,
+				name: "recents"
+			};
+			var noAnn = {
+				list: [],
+				index: 0,
+				name: "noAnn"
+			};
+			var autoAnn = {
+				list: [],
+				index: 0,
+				name: "autoAnn"
+			};
+			var handAnn = {
+				list: [],
+				index: 0,
+				name: "handAnn"
+			};
+			var getList = {
+				"recents": () => {
+					return recents;
+				},
+				"noAnn": () => {
+					return noAnn;
+				},
+				"autoAnn": () => {
+					return autoAnn;
+				},
+				"handAnn": () => {
+					return handAnn;
+				}
+			};
+			const imagesXtime = 20;
+			var cards = []; // in sessionStorage in order to avoid to read JSON-file. Useful for recents
+			var noAnn_selected = [];
+			var sendingCards = [];
+			var controller;
+			var signal;
+
+			// DA EDIT
+			var box_Rows = document.getElementsByClassName("box-rows");
+			var commands = document.getElementsByClassName("svg-wrap");
+			const divTitle = document.getElementById("filename");
+			const editor = document.getElementById("editor");
+			const ctx = editor.getContext("2d");
+			const editErr_msg = document.getElementById("editErr-msg");
+			const annotatedImage = document.createElement("img");
+			const pencil = document.querySelector("use[href='#pencil']");
+			const rows = document.querySelectorAll(".box-rows");
+			var lastQuadSelected = -1;
+			var lastLabelValue = ""; // "title/author/note/collocation"
+			var lastCanvasWidth;
+			var nextId = 0;
+			var missingLabels = ["Titolo", "Autore", "Note", "Collocazione"];
+			var initialState = {};
+			var editingCard;
+			var quads = [];
+			var originalImWidth = 0;
+			var originalImHeight = 0;
+			var scale = 1.0;
+			var scaleMultiplier = 0.9;
+			var translatePos = {};
+			var actionsStack = [];
+			var stackIndex = -1;
+			var Mac_operatingSystem = false;
+			var saving = false;
+			var drawSelected = false;
+			var errMessages = {
+				deletion: "Seleziona prima la box che vuoi cancellare",
+				resize: "Seleziona prima la box vuoi che ridurre/ingrandire",
+				draw: "Ci sono già 4 box: cancellane una prima di disegnare una nuova"
+			};
+			var dragId,
+				dragOffset,
+				dragResize = false,
+				dragResizeIndex,
+				dragMoving = false,
+				resizeRectangle,
+				resizeLine = false,
+				resizeLineAxis,
+				mouseDown = false,
+				justAclick = true,
+				startingCorners;
+			var ratio;
+			var dim;
+			// FINE DA EDIT
+
+			// DA SEARCH
+			const searchErrDiv = document.getElementById("searchErrDiv");
+			const searchScroller = document.getElementById("searchScroller");
+			const searchHeader = document.getElementById("search-header");
+			const btnSave = document.getElementById("save-btn");
+			// NEW STUFF
+			const home = document.getElementById("home");
+			const editing = document.getElementById("editing");
+			const search = document.getElementById("search");
+			const colorErrorToast = "rgba(255, 0, 0, 0.5)";
+			const colorSuccessToast = "rgba(144, 238, 144, 0.5)";
+			const keyUndo = document.getElementById("key-undo");
+			const keyRedo = document.getElementById("key-redo");
+			const ask4Ann = document.getElementById("ask4Ann");
+			const startEditing = document.getElementById("startEditing");
+			const shortcuts = document.getElementById("shortcuts");
+			const key_grids  = shortcuts.querySelectorAll(".key-grid");
+			const icons = document.getElementById("icons");
+			var page;
+			var tooltip_options = {
+				delay: {"show": 0, "hide": 100},
+				placement: "bottom",
+				animation: false,
+				html: true
+			}
+			var controller_priority;
+			var signal_priority;
+			var card_withPriority = false;
+			var googleChannel_free = true;
+
+			// Event listeners
+			window.addEventListener("popstate", (e) => {
+				page = e.state["page"];
+				switch (page) {
+					case "home":						
+						showHomePage();
+						break;
+					case "edit":
+						showEditPage(e.state["card"]);
+						break;
+					case "search":
+						showSearchPage();
+						break;
+				}
+			})
+
+			window.addEventListener("load", async (e) => {
+				// HOME
+				// synchronize JSON files with images in filesystem
+				// try {
+				// 	await synchroImagesJSON();
+
+				// } catch(error) {
+				// 	console.error(error);
+				// }
+				// append content Home
+				try {
+					await initSlider();
+				}
+				catch(error) {
+					console.error(error);
+				}
+				// DO NOT KNOW WHY, without timeout mediaScroller.scrollWidth is wrong
+				setTimeout(() => {
+					toggleSliderArrows(container_Recents.querySelector(".media-scroller"));
+					toggleSliderArrows(container_NoAnn.querySelector(".media-scroller"));
+					toggleSliderArrows(container_AutoAnn.querySelector(".media-scroller"));
+					toggleSliderArrows(container_HandAnn.querySelector(".media-scroller"));
+				},600);
+				if (navigator.appVersion.indexOf("Mac") != -1) {
+					Mac_operatingSystem = true;
+					keyUndo.textContent = "Cmd + Z";
+					keyRedo.textContent = "Cmd + Y";
+				}
+				// append content searchPage
+				for (const file of cards) {
+					let newElement = document.createElement("div");
+					newElement.classList.add("media-element", "collapse");
+					newElement.setAttribute("data-id", file["id"]);
+					newElement.setAttribute("data-cat", mapStatusCat(file["status"]));
+					let newImg = document.createElement("img");
+					newImg.setAttribute("src", "/server/resizedImages/" + file["filename"]);
+					let newFigcaption = document.createElement("figcaption");
+					newFigcaption.classList.add("text-center", "pe-1");
+					newFigcaption.textContent = file["id"];
+					let span = document.createElement("span");
+					span.classList.add("float-end", "status");
+					span.setAttribute("tabindex", "0");
+					span.setAttribute("data-bs-toggle", "tooltip");
+					span.setAttribute("data-bs-custom-class", "custom-tooltip");
+					span.textContent = "S:" + file["status"];
+					newFigcaption.append(span);
+					newElement.append(newImg);
+					newElement.append(newFigcaption);
+					let onloadText = document.createElement("p");
+					onloadText.classList.add("text-onload", "collapse");
+					onloadText.textContent = "Annotazione in corso...";
+					newElement.append(onloadText);
+					searchScroller.append(newElement);
+				}
+				// show Home
+				page = "home";
+				window.history.pushState({ page: "home"}, "", "/home");
+				// DO NOT KNOW WHY, without timeout showHomePage doesn't show tooltip
+				setTimeout(() => {
+					showHomePage();
+				}, 301);
+			});
+
+			cancelSelection_btn.addEventListener("click", (e) => {
+				noAnn_selected = [];
+				var selectedElements = document.querySelectorAll(".selected");
+				for (const el of selectedElements) {
+					el.classList.remove("selected");
+					el.querySelector("svg.check").classList.remove("show");
+				}
+				googleAnn_btn.textContent = "Richiedi annotazione di " + noAnn_selected.length + " schede";
+				googleAnn_btn.disabled = true;
+				cancelSelection_btn.classList.remove("show");
+			});
+
+			get10Cards.addEventListener("click", (e) => {
+				var found = false;
+				var n_child = 1;
+				var selectedChildren = 0;
+				const mediaScroller = container_NoAnn.querySelector(".media-scroller");
+				while(!found) {
+					let mediaElement = mediaScroller.querySelector(".media-element:nth-child(" + n_child + ")");
+					// handle end of media elements
+					if (!mediaElement) {
+						found = true;
+					}
+					if (mediaElement.classList.contains("selected") || mediaElement.classList.contains("onload")) {
+						n_child += 1;
+						continue;
+					}
+					mediaElement.classList.add("selected");
+					mediaElement.querySelector("svg.check").classList.add("show");
+					noAnn_selected.push(mediaElement.getAttribute("data-id"));
+					selectedChildren += 1;
+					if (selectedChildren == 10) {
+						found = true;
+					}
+					n_child += 1;
+				}
+				// update button
+				googleAnn_btn.textContent = "Richiedi annotazione di " + noAnn_selected.length + " schede";
+				googleAnn_btn.disabled = false;
+				cancelSelection_btn.classList.add("show");
+				// show selected cards
+				if (noAnn_selected.length > noAnn["index"]) {
+					showCards(mediaScroller, noAnn["index"], noAnn["index"] + imagesXtime, noAnn);
+					noAnn["index"] = Math.min(noAnn["index"] + imagesXtime, noAnn["list"].length);
+				}
+			});
+
+			searchBar.addEventListener("input", (e) => {
+				var inputVal = searchBar.value;
+				if(inputVal.length < 1) {
+					window.history.pushState({ page: "home"}, "", "/home");
+					showHomePage();
+					return;
+				}
+				if (page == "home") {
+					window.history.pushState({ page: "search"}, "", "/search");
+					showSearchPage();
+				}
+				searchHeader.textContent = "Risultati per: " + inputVal;
+				var cardsList = cards.filter(card => {
+					return (card["id"].toLowerCase().includes(inputVal) || (card["title"] && card["title"].toLowerCase().includes(inputVal)) || (card["author"] && card["author"].toLowerCase().includes(inputVal)))
+				});
+				if (cardsList.length < 1) {
+					searchErrDiv.classList.add("show");
+				}
+				else {
+					searchErrDiv.classList.remove("show");
+				}
+				var mediaElements = searchScroller.querySelectorAll(".media-element");
+				for (const mediaElement of mediaElements) {
+					let cardId = mediaElement.getAttribute("data-id");
+					let card = cardsList.find(c => c["id"] == cardId);
+					if(card) {
+						mediaElement.classList.add("show");
+					}
+					else {
+						mediaElement.classList.remove("show");
+					}
+				}
+				toggleSliderArrows(searchScroller);
+			});
+
+			Array.from(arrows).forEach((el, idx) => {
+				el.addEventListener("mouseover", (e) => {
+					el.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+					el.setAttribute("fill", "white");
+				});
+				el.addEventListener("mouseout", (e) => {
+					el.style.backgroundColor = "rgb(255, 255, 255)";
+					el.setAttribute("fill", "black");
+				});
+				el.addEventListener("click", (e) => {
+					var scroller = el.closest(".media-wrap").querySelector(".media-scroller");
+					if(el.classList.contains("slide-left")) {
+						scroller.scrollLeft -= scroller.clientWidth / 2
+					}
+					else if(el.classList.contains("slide-right")) {
+						scroller.scrollLeft += scroller.clientWidth / 2;
+					}
+				})
+			});
+
+			// updateResults by input
+			Array.from(inputBars).forEach((el, idx) => {
+				el.addEventListener("input", (e) => {
+					let mediaContainer = el.closest(".media-container");
+					let mediaScroller = mediaContainer.querySelector(".media-scroller");
+					let listVars = getList[mediaContainer.id]();
+					if(el.value.length < 1) {
+						showCards(mediaScroller, 0, listVars.index, listVars);
+						hideCards(mediaScroller, listVars.index, listVars.list.length, listVars);
+						toggleSliderArrows(mediaScroller);
+						let errDiv = mediaScroller.querySelector(".errDiv");
+						if(errDiv) {
+							errDiv.remove();
+						}
+						get10Cards.disabled = false;
+						return;
+					}
+					// el.value > 0
+					if (el.name == "noAnn") {
+						get10Cards.disabled = true;
+					}
+					var cardsList = findCards_inCategory(el.value, el.name);
+					let loadMore_btn = mediaScroller.querySelector(".load-more");
+					if(loadMore_btn) {
+						loadMore_btn.classList.remove("show");
+					}
+					for (const mediaElement of mediaScroller.children) {
+						if (mediaElement.classList.contains("load-more")) {
+							continue; // CHANGE CODE
+						}
+						let card = cardsList.find(c => c["id"] == mediaElement.getAttribute("data-id"));
+						if(card) {
+							mediaElement.classList.add("show");
+						}
+						else {
+							mediaElement.classList.remove("show");
+						}
+					}
+					// toggle arrows
+					toggleSliderArrows(mediaScroller);
+					// toggle empty slider message
+					if(cardsList.length < 1) {
+						if(mediaScroller.querySelector(".errDiv")) {
+							return;
+						}
+						let errDiv = document.createElement("div");
+						errDiv.classList.add("errDiv");
+						errDiv.textContent = "Non ci sono schede che soddisfano la ricerca";
+						mediaScroller.append(errDiv);
+					}
+					else {
+						let errDiv = mediaScroller.querySelector(".errDiv");
+						if(errDiv) {
+							errDiv.remove();
+						}
+					}
+				});
+			});
+
+			Array.from(mediaScrollers).forEach(el => {
+				el.addEventListener("click", (e) => {
+					// click on IMAGE
+					if (e.target.tagName == "IMG" || e.target.tagName == "FIGCAPTION") {
+						let mediaElement = e.target.closest(".media-element");
+						if (page == "search" || mediaElement.closest(".media-container").id == "recents") {
+							handleCardClick_inSearchNRecents(mediaElement);
+							return;
+						}
+						if(mediaElement.getAttribute("data-cat") == "noAnn" && askGoogle.checked) {
+							handleNotAnnotated(mediaElement);
+							return;
+						}
+						editingCard = mediaElement.getAttribute("data-id");
+						window.history.pushState({ page: "edit", card: editingCard}, "", "/edit");
+						showEditPage(editingCard);
+					}
+					// click on BUTTON.LOAD-MORE
+					else if (e.target.classList.contains("load-more")) {
+						let mediaScroller = e.target.closest(".media-scroller");
+						let listName = e.target.closest(".media-container").id;
+						let listVars  = getList[listName]();
+						let startIndex = listVars.index;
+						listVars.index  = Math.min(listVars.list.length, startIndex + imagesXtime);
+						showCards(mediaScroller, startIndex, listVars.index, listVars);
+						return;
+					}
+				});
+			});
+
+			notifications.addEventListener("mouseenter", (e) => {
+				notifyBox.classList.add("show");
+				badge.classList.remove("show");
+			});
+
+			navbar.addEventListener("mouseleave", (e) => {
+				notifyBox.classList.remove("show");
+			});
+
+			notifyList.addEventListener("click", (e) => {
+				if(e.target.classList.contains("close") || (e.target.tagName == "use" && e.target.parentElement.classList.contains("close"))) {
+					// abort
+					if (controller) {
+						controller.abort();
+					}
+					// update style
+					var item = e.target.closest(".notify-item");
+					var cardId = item.querySelector(".cardId").getAttribute("data-id");
+					var card = container_NoAnn.querySelector(".media-element[data-id='" + cardId + "']");
+					// slider
+					card.classList.remove("onload");
+					card.querySelector(".text-onload").classList.remove("show");
+					// slider in searchPage
+					let searchCard = search.querySelector(".media-element[data-id='" + cardId + "']");
+					searchCard.classList.remove("onload");
+					searchCard.querySelector(".text-onload").classList.remove("show");
+					// box
+					item.remove();
+				}
+			});
+
+			notifyList.addEventListener("mouseover", (e) => {
+				let item = e.target.closest(".notify-item");
+				item.style.backgroundColor = "rgba(128, 128, 128, 0.2";
+			});
+
+			notifyList.addEventListener("mouseout", (e) => {
+				let item = e.target.closest(".notify-item");
+				item.style.backgroundColor = "initial";
+			});
+
+			notifyClear.addEventListener("click", (e) => {
+				sendingCards = [];
+				if (controller) {
+					controller.abort();
+				}
+				if (controller_priority) {
+					controller_priority.abort();
+				}
+				var elements = notifyList.querySelectorAll(".notify-item.sending");
+				for (const el of elements) {
+					// slider
+					var cardId = el.querySelector(".cardId").getAttribute("data-id");
+					var card = container_NoAnn.querySelector(".media-element[data-id='" + cardId + "']");
+					card.classList.remove("onload");
+					card.querySelector(".text-onload").classList.remove("show");
+					let searchCard = search.querySelector(".media-element[data-id='" + cardId + "']");
+					searchCard.classList.remove("onload");
+					searchCard.querySelector(".text-onload").classList.remove("show");
+					// box
+					el.remove();
+				}
+			});
+
+			askGoogle.addEventListener("change", (e) => {
+				if (askGoogle.checked) {
+					get10Cards.disabled = false;
+					return;
+				}
+				// deselect every mediaElement
+				var selected = document.getElementsByClassName("selected");
+				Array.from(selected).forEach(el => {
+					el.classList.remove("selected");
+					el.querySelector("svg.check").classList.remove("show");
+					// update array selected
+					let idx = noAnn_selected.findIndex(x => x == el.getAttribute("data-id"));
+					if(idx < 0) {
+						//console.log("SHOULD NOT BE HERE");
+					}
+					noAnn_selected.splice(idx, 1);
+				})
+				// update button
+				googleAnn_btn.textContent = "Richiedi annotazione di " + noAnn_selected.length + " schede";
+				if(noAnn_selected.length < 1) {
+					googleAnn_btn.disabled = true;
+					cancelSelection_btn.classList.remove("show");
+				}
+				get10Cards.disabled = true;
+			});
+
+			inputFile.addEventListener("input", async (e) => {
+				let formData = new FormData();
+				formData.append("image", inputFile.files[0]);
+				formData.append("name", inputFile.files[0].name);
+				try {
+					await addNewImage(formData);
+				}
+				catch(error) {
+					console.error(error);
+				}
+				editingCard = inputFile.files[0].name.replace(/\.[^/.]+$/, "");
+				window.history.pushState({ page: "edit", card: editingCard}, "", "/edit");
+				showEditPage(editingCard);
+				return;
+			});
+
+			// Edit
+
+			// window resize
+			window.addEventListener("resize", (event) => {
+				if (!editing.classList.contains("show")) {
+					return;
+				}
+				// update editor size
+				// editor = document.getElementById("editor");
+				// ctx = editor.getContext("2d");
+				// ratio = annotatedImage.width / annotatedImage.height;
+				dim = editor.getBoundingClientRect();
+				editor.width = dim.width * devicePixelRatio;
+				editor.height = editor.width / ratio;
+				// update quads coords
+				for (const quad of quads) {
+					var old_corners = quad.corners;
+					var new_corners = [];
+					for (var i = 0; i < old_corners.length; i++) {
+						let new_x = old_corners[i].x * editor.width / lastCanvasWidth;
+						let new_y = old_corners[i].y * editor.height / lastCanvasHeight;
+						let new_corner = {x: new_x, y: new_y};
+						new_corners.push(new_corner);
+					}
+					quad.updateCorners = new_corners;
+				}
+				// update startingCorners
+				for (const quad of initialState.quads) {
+					var old_StartingCorners = quad.corners;
+					var new_StartingCorners = [];
+					for (var i = 0; i < old_StartingCorners.length; i++) {
+						let new_x = old_StartingCorners[i].x * editor.width / lastCanvasWidth;
+						let new_y = old_StartingCorners[i].y * editor.height / lastCanvasHeight;
+						let new_corner = {x: new_x, y: new_y};
+						new_StartingCorners.push(new_corner);
+					}
+					quad.corners = new_StartingCorners;
+				}
+				// update
+				lastCanvasWidth = editor.width;
+				lastCanvasHeight = editor.height;
+				draw();
+			});
+
+			toggleShortcuts.addEventListener("click", (e) => {
+				key_grids.forEach(el => {
+					if(el.classList.contains("show")) {
+						el.classList.remove("show");
+					}
+					else {
+						el.classList.add("show");
+					}
+				})
+				let svg = e.target.querySelector(".caret");
+				let use = svg.querySelector("use");
+				if(svg.classList.contains("down")) {
+					use.setAttribute("href", "#caret-up");
+					svg.classList.remove("down");
+				}
+				else {
+					use.setAttribute("href", "#caret-down");
+					svg.classList.add("down");
+				}
+			});
+
+			editErr_msg.addEventListener("animationend", (e) => {
+				hideError();
+			});
+
+			editor.addEventListener("wheel", (e) => {
+				e.preventDefault();
+				let new_dragoffset = {
+					x: e.offsetX * devicePixelRatio,
+					y: e.offsetY * devicePixelRatio
+				}
+				var s0 = scale;
+				var scaleBy = e.deltaY * -0.01;
+				if(scale + scaleBy < 0.50 || scale + scaleBy > 7) {
+					return;
+				}
+				scale += scaleBy;
+				translatePos.x = new_dragoffset.x - (new_dragoffset.x - translatePos.x) * (scale/s0);
+				translatePos.y = new_dragoffset.y - (new_dragoffset.y - translatePos.y) * (scale/s0);
+				draw();
+			});
+
+			Array.from(box_Rows).forEach(el => {
+				el.addEventListener("click", (e) => {
+					let label = labelLabelMap(el.querySelector("option:checked").value);
+					let quad = quads.find(q => q.label == label);
+					if(!quad) {
+						return;
+					}
+					lastQuadSelected = quad.id;
+					toggleSelectedArea();
+					draw();
+				});
+			});
+
+			// select changes
+			Array.from(selects).forEach((el, idx) => {
+				el.addEventListener("click", (e) => {
+					lastLabelValue = el.value;
+				})
+				el.addEventListener("change", (e) => {
+					// vars for actionsStack
+					var ids = [];
+					var corners = [];
+					var labels = [];
+					var startingLabels = [];
+					// update quad-label and quad-color + missingLabels
+					var quad = quads.find((q) => q.label == labelLabelMap(lastLabelValue));
+					ids.push(quad.id);
+					corners.push(quad.corners);
+					labels.push(el.value);
+					startingLabels.push(lastLabelValue);
+					var quadSwap = quads.find((q) => q.label == labelLabelMap(el.value));
+					quad.label = labelLabelMap(el.value);
+					quad.color = labelColorMap(el.value);
+					if(quadSwap) {
+						ids.push(quadSwap.id);
+						corners.push(quadSwap.corners);
+						labels.push(lastLabelValue);
+						startingLabels.push(el.value);
+						quadSwap.label = labelLabelMap(lastLabelValue);
+						quadSwap.color = labelColorMap(lastLabelValue);
+					}
+					else {
+						const idx = missingLabels.findIndex((l) => l == labelLabelMap(el.value));
+						if(idx > -1) {
+							missingLabels.splice(idx, 1);
+							missingLabels.push(labelLabelMap(lastLabelValue));
+						}
+					}
+
+					// update textarea
+					var t2 = document.getElementById(el.value); // textarea that has to swap with the changing element
+					var t1 = document.getElementById(lastLabelValue); // textarea whose select has changed
+					t2.closest(".box-rows").querySelector(".form-select").value = lastLabelValue; // update select of t2
+					swapTextarea(t1, t2);
+					// update selected
+					// update actionsStack
+					updateStack({
+						action: "labelling",
+						id: ids,
+						corners: corners,
+						startingCorners: corners,
+						label: labels,
+						startingLabel: startingLabels
+					});
+					draw();
+				});
+			});
+
+			document.addEventListener("keydown", (e) => {
+				if (!editing.classList.contains("show") || card_withPriority) {
+					return;
+				}
+				if (document.activeElement.tagName == "TEXTAREA") {
+					return;
+				}
+				switch (e.key) {
+					case "Backspace":
+						if(lastQuadSelected >= 0) {
+							deleteBox();
+						}
+						break;
+					case "+":
+						if(lastQuadSelected >= 0) {
+							resizeBox(true);
+						}
+						break;
+					case "-":
+						if(lastQuadSelected >= 0) {
+							resizeBox(false);
+						}
+						break;
+					case "r":
+						setInitialState();
+						break;
+					case "f":
+						recenter();
+						break;
+					case "z":
+						if (e.ctrlKey || (Mac_operatingSystem && e.metaKey)) {
+							undo();
+						}
+						break;
+					case "y":
+						e.preventDefault();
+						if (e.ctrlKey || (Mac_operatingSystem && e.metaKey)) {
+							redo();
+						}
+						break;
+				}
+			});
+
+			// mouseDOWN
+			editor.addEventListener("mousedown", (e) => {
+				if (e.button !== 0) {
+					return;
+				}
+
+				mouseDown = true;
+				justAclick = true;
+
+				// NEW Quad
+
+				if(drawSelected) {
+					const new_corners = [
+						{x: offsetConverter(e.offsetX, translatePos.x), y: offsetConverter(e.offsetY, translatePos.y)},
+						{x: offsetConverter(e.offsetX, translatePos.x), y: offsetConverter(e.offsetY, translatePos.y)},
+						{x: offsetConverter(e.offsetX, translatePos.x), y: offsetConverter(e.offsetY, translatePos.y)},
+						{x: offsetConverter(e.offsetX, translatePos.x), y: offsetConverter(e.offsetY, translatePos.y)}
+					];
+					let color = "#000";
+					if (missingLabels.length > 0) {
+						color = labelColorMap(missingLabels[0]);
+					}
+					const new_quad = new Quad(++nextId, new_corners, color, missingLabels[0]);
+					quads.push(new_quad);
+					startEditing.classList.remove("show");
+					draw();
+
+					dragId = new_quad.id;
+					dragOffset = { x: offsetConverter(e.offsetX, translatePos.x), y: offsetConverter(e.offsetY, translatePos.y) };
+					dragResizeIndex = 0;
+					resizeRectangle = true;
+					justAclick = false;
+					return;
+				}
+
+				// MOVE & RESIZE Quad
+
+				let found = false;
+				dragOffset = {
+					x: offsetConverter(e.offsetX, translatePos.x),
+					y: offsetConverter(e.offsetY, translatePos.y)
+				};
+
+				for (const quad of quads) {
+
+					// Case resize 1 angle
+					var closeCorner = quad.closeToCorner(dragOffset);
+					if (closeCorner) { // must shift-left closeCorner by 1
+						closeCorner -= 1;
+						found = true;
+						dragResize = true;
+						justAclick = false;
+						dragId = quad.id;
+						lastQuadSelected = dragId;
+						toggleSelectedArea();
+						dragResizeIndex = closeCorner;
+						dragOffset = quad.corners[dragResizeIndex];
+						startingCorners = JSON.parse(JSON.stringify(quad.corners));
+						return;
+					}
+
+					// Case resize 2 angles (1 side)
+					var closeLine = quad.closeToSegmentMidpoint(dragOffset);
+					if(closeLine.bool){
+						found = true;
+						resizeLine = true;
+						justAclick = false;
+						dragId = quad.id;
+						lastQuadSelected = dragId;
+						toggleSelectedArea();
+						dragResizeIndex = closeLine.angles;
+						resizeLineAxis = closeLine.axis;
+						startingCorners = JSON.parse(JSON.stringify(quad.corners));
+						return;
+					}
+
+					// Case moving (but not resize)
+					if (quad.isPointInside(dragOffset)) {
+						found = true;
+						dragMoving = true;
+						justAclick = false;
+						dragId = quad.id;
+						lastQuadSelected = dragId;
+						toggleSelectedArea();
+						startingCorners = JSON.parse(JSON.stringify(quad.corners));
+						return;
+					}
+				}
+			});
+
+			// mouseUP
+			editor.addEventListener("mouseup", mouseUp);
+
+			// mouseMOVE
+			editor.addEventListener("mousemove", (e) => {
+				var offset = {
+					x: offsetConverter(e.offsetX, translatePos.x),
+					y: offsetConverter(e.offsetY, translatePos.y)
+				};
+
+				// update cursor style
+				updateCursor(offset);
+				
+				// moving image inside canvas
+				if (!dragId && mouseDown) {
+					justAclick = false;
+					let new_dragoffset = {
+						x: offsetConverter(e.offsetX, 0),
+						y: offsetConverter(e.offsetY, 0)
+					}
+					translatePos.x = (new_dragoffset.x - dragOffset.x) / (1/scale);
+					translatePos.y = (new_dragoffset.y - dragOffset.y) / (1/scale);
+					draw();
+					return;
+				}
+
+				const quad = quads.find((t) => t.id === dragId);
+
+				if (!quad) {
+					return;
+				}
+
+				// Case Quad generation (rectangle)
+				if (resizeRectangle) {
+					//const corner = quad.corners[dragResizeIndex];
+					const newCorner = {
+						x: offset.x,
+						y: offset.y
+					};
+
+					const new_corners = [
+						{ x: dragOffset.x, y: dragOffset.y }, // initial point
+						{
+							x: newCorner.x,
+							y: dragOffset.y
+						},
+						{ // moving-corner
+							x: newCorner.x,
+							y: newCorner.y
+						},
+						{
+							x: dragOffset.x,
+							y: newCorner.y
+						}
+					]
+					quad.updateCorners = new_corners;
+					draw();
+
+					return;
+				}
+
+				// Case Quad resize 1 angle
+				if (dragResize && dragResizeIndex >= 0) {
+					// update corner
+					const corners = quad.corners;
+					new_corner = {
+						x: offset.x,
+						y: offset.y
+					}
+					corners[dragResizeIndex] = new_corner;
+					quad.updateCorners = corners;
+
+					draw();
+					return;
+				}
+
+				// Case Quad resize 2 angles
+				if (resizeLine && dragResizeIndex.length && resizeLineAxis) {
+					const corners = quad.corners;
+					// update corners
+					if (resizeLineAxis == "x") {
+						corners[dragResizeIndex[0]] = {
+							x: corners[dragResizeIndex[0]].x + offset.x - dragOffset.x,
+							y: corners[dragResizeIndex[0]].y
+						};
+						corners[dragResizeIndex[1]] = {
+							x: corners[dragResizeIndex[1]].x + offset.x - dragOffset.x,
+							y: corners[dragResizeIndex[1]].y
+						};
+					}
+					else {
+						corners[dragResizeIndex[0]] = {
+							x: corners[dragResizeIndex[0]].x,
+							y: corners[dragResizeIndex[0]].y + offset.y - dragOffset.y
+						};
+						corners[dragResizeIndex[1]] = {
+							x: corners[dragResizeIndex[1]].x,
+							y: corners[dragResizeIndex[1]].y + offset.y - dragOffset.y
+						};
+					}
+					dragOffset.x = offset.x;
+					dragOffset.y = offset.y;
+					quad.updateCorners = corners;
+					draw();
+					return;
+				}
+
+				// Case Quad moving --> update all corners
+				if(dragMoving) {
+					let x = offset.x - dragOffset.x;
+					let y = offset.y - dragOffset.y;
+					const old_corners = quad.corners;
+					const new_corners = [];
+					//console.log("old corner: " + JSON.stringify(quad.corners[0]));
+					for (const corner of old_corners) {
+						new_x = corner.x + offset.x - dragOffset.x;
+						new_y = corner.y + offset.y - dragOffset.y;
+						new_corners.push({
+							x: new_x,
+							y: new_y
+						});
+					}
+					dragOffset.x = JSON.parse(JSON.stringify(offset.x));
+					dragOffset.y = JSON.parse(JSON.stringify(offset.y));
+					quad.updateCorners = new_corners;
+					draw();
+					return;
+				}
+			});
+
+			// mouseLEAVE
+			editor.addEventListener("mouseleave", mouseUp);
+
+			annotatedImage.addEventListener("load", async (e) => {
+				ratio = annotatedImage.width / annotatedImage.height;
+				dim = editor.getBoundingClientRect();
+				editor.width = dim.width * devicePixelRatio;
+				editor.height = editor.width / ratio;
+				lastCanvasWidth = editor.width;
+				lastCanvasHeight = editor.height;
+				
+				lastQuadSelected = -1;
+				lastLabelValue = "";
+				nextId = 0;
+				missingLabels = ["Titolo", "Autore", "Note", "Collocazione"];
+				initialState = {};
+				quads = [];
+				originalImWidth = 0;
+				originalImHeight = 0;
+				scale = 1.0;
+				scaleMultiplier = 0.9;
+				actionsStack = [];
+				stackIndex = -1;
+				saving = false;
+				drawSelected = false;
+				Array.from(box_Rows).forEach(el => {
+					let select = el.querySelector(".sel-hider");
+					select.querySelector("select").selectedIndex = -1;
+					select.classList.remove("show");
+					let textarea = el.querySelector(".ta-hider");
+					textarea.classList.remove("show");
+					textarea.querySelector("textarea").value = "";
+				});
+				// set local vars
+				dragMoving = false;
+				dragResize = false;
+				resizeLine = false;
+				mouseDown = false;
+				justAclick = true;
+				resizeLineAxis = undefined;
+				dragResizeIndex = undefined;
+				dragId = undefined;
+				dragOffset = undefined;
+				startingCorners = undefined;
+				resizeRectangle = undefined;
+
+				translatePos.x =  0;
+				translatePos.y = 0;
+				scale = 1;
+				quads = [];
+
+				// Set boxes and text from JSON
+				try {
+					jsonData = await readJSON("./server/appAnnotations/" + editingCard + ".json");
+				}
+				catch {
+					jsonData = {
+						"originalImSize": {
+							"width": annotatedImage.naturalWidth,
+							"height": annotatedImage.naturalHeight
+						},
+						"boxes": []
+					}
+				}
+				originalImWidth = jsonData["originalImSize"]["width"];
+				originalImHeight = jsonData["originalImSize"]["height"];
+				if (jsonData["boxes"].length < 1 && !sendingCards.includes(editingCard)) {
+					startEditing.classList.add("show");
+				}
+				for (const box of jsonData["boxes"]){
+					let vects = box["vects"];
+					let color = box["color"];
+					let label = box["label"];
+					let coefX = editor.width / originalImWidth;
+					let coefY = editor.height / originalImHeight;
+					let new_corners = [
+						{ x: vects[0][0] * coefX, y: vects[0][1] * coefY },
+						{ x: vects[1][0] * coefX, y: vects[1][1] * coefY },
+						{ x: vects[2][0] * coefX, y: vects[2][1] * coefY },
+						{ x: vects[3][0] * coefX, y: vects[3][1] * coefY },
+					];
+					const new_quad = new Quad(++nextId, new_corners, color, label);
+					quads.push(new_quad);
+					loadText(label, box["text"]);
+					let idx = missingLabels.indexOf(label);
+					if(idx > -1){
+						missingLabels.splice(idx, 1);
+					}
+				}
+
+				// save InitialState
+				var boxRows = [];
+				var initialQuads = [];
+				
+				// rows
+				rows.forEach(row => {
+					var selectHider = row.querySelector(".sel-hider");
+					if (selectHider.classList.contains("show")) {
+						var select = selectHider.querySelector(".form-select");
+						var option = select.options[select.selectedIndex].value;
+						var textArea = document.getElementById(option);
+						boxRows.push({
+							show: true,
+							option: option,
+							text: textArea.value
+						});
+					}
+					else {
+						var option = row.querySelector("textarea").id;
+						boxRows.push({
+							show: false,
+							option: option,
+							text: ""
+						});
+					}
+				});
+				// quads
+				for (const quad of quads) {
+					let quad_info = {
+						"id": quad.id,
+						"corners": JSON.parse(JSON.stringify(quad.corners)),
+						"color": quad.color,
+						"label": quad.label
+					};
+					initialQuads.push(quad_info);
+				}
+				initialState = {
+					"quads": initialQuads,
+					"boxRows": boxRows
+				};
+				draw();
+			});
+
+			ask4Ann.addEventListener("click", async (e) => {
+				// add animation
+				let spinner = document.createElement("span");
+				spinner.classList.add("spinner-border", "spinner-border-sm", "me-3");
+				spinner.setAttribute("role", "status");
+				ask4Ann.insertBefore(spinner, ask4Ann.firstChild);
+				ask4Ann.disabled = true;
+				// edit card in HomePage
+				let card_home = home.querySelector(".media-element[data-id='" + editingCard + "']");
+				// if (card_home) {
+				// 	card_home.classList.add("onload");
+				// 	card_home.querySelector(".text-onload").classList.add("show");
+				// }
+				// Google API
+				card_withPriority = true;
+				while (!googleChannel_free) {
+					await new Promise(r => setTimeout(r, 4000));
+				}
+				controller_priority = new AbortController();
+				signal_priority = controller_priority.signal;
+				try {
+					await sendImgToGC(editingCard, signal_priority);
+					let card = cards.find(c => c["id"] == editingCard);
+					let old_status;
+					if (!card) {
+						old_status = 0;
+						card = {
+							"filename": editingCard + "jpg",
+							"id": editingCard,
+							"status": 1
+						};
+						cards.push(card);
+					}
+					else {
+						old_status = card["status"];
+						card["status"] = 1;
+					}
+					sessionStorage.setItem("cards", JSON.stringify(cards));
+					try {
+						await updateCards_inFile([card]);
+					}
+					catch(error) {
+						console.error(error);
+					}
+					updateSliders(editingCard, 1, mapStatusCat(old_status), "autoAnn");
+					annotatedImage.src = "./server/all_caronti_cards/" + editingCard + ".jpg";
+				}
+				catch (error) {
+					console.error(error);
+				}
+				finally {
+					card_withPriority = false;
+					removeSpinner(ask4Ann);
+					// if (card_home) {
+					// 	card_home.classList.remove("onload");
+					// 	card_home.querySelector(".text-onload").classList.remove("show");
+					// }
+				}
+			});
+
+			addEventListener("beforeunload", async (e) => {
+			  e.preventDefault();
+			  if (sendingCards.length > 0) {
+				if (controller) {
+					controller.abort();
+				}
+				// controller_priority ??
+				return e.returnValue = "Are you sure you want to exit?";
+			  }
+			  else {
+				return;
+			  }
+			});
+
+		</script>
+	</body>
+</html>

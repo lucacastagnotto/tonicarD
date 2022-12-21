@@ -1,0 +1,433 @@
+body {
+	overflow-x: hidden;
+}
+
+p {
+	margin: auto;
+}
+
+a, a:hover {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.nav-item > a {
+	color: white !important;
+}
+
+.nav-item > a:hover {
+	font-weight: 500;
+}
+
+label {
+	cursor: pointer;
+}
+
+.bell {
+	position: relative;
+}
+
+.bell:hover {
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-collapse {
+	position: relative;
+}
+
+#openFile-btn {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#labelNewImg {
+	color: black;
+	background-color: white;
+	font-weight: 500;
+	padding: 5px;
+	border-radius: 0.375em;
+	border: 0;
+}
+
+h1 {
+	padding: 5px;
+	border-bottom: 1px solid #707070;
+}
+
+.media-container {
+	position: relative;
+}
+
+.media-wrap {
+	display: grid;
+	grid-auto-flow: column;
+}
+
+.media-scroller {
+	display: grid;
+	grid-auto-flow: column;
+	gap: 0.5rem;
+	grid-auto-columns: 14%;
+	overflow-x: auto;
+	scroll-behavior: smooth;
+	padding-bottom: 15px;
+	align-items: end;
+	/*margin: 0px 1px 0px 1px;*/
+}
+
+.slide-wrap {
+	width: min-content;
+}
+
+.media-scroller,
+.slide-wrap {
+	padding-bottom: 15px;
+}
+
+.media-element {
+	border-radius: 0.25rem;
+	grid-auto-columns: 1fr;
+	position: relative;
+	border: 2px solid transparent;
+	cursor: pointer;
+}
+
+.media-element img {
+	width: 100%;
+	object-fit: cover;
+}
+
+.media-element:hover {
+	opacity: 0.6;
+}
+
+figcaption {
+	font-size: 12px;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+}
+
+svg.slide {
+	width: 50px;
+	height: 100%;
+}
+
+svg.check {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	top: 75%;
+	right: 5%;
+	z-index: 3;
+}
+
+svg.close {
+	width: 16px;
+	height: 16px;
+	fill: rgba(128, 128, 128, .5);
+}
+
+svg.ok {
+	width: 16px;
+	height: 16px;
+}
+
+svg.failed {
+	width: 16px;
+	height: 16px;
+	fill: red;
+}
+
+svg {
+	cursor: pointer;
+}
+
+.nav-categories {
+	padding: 0px 50px 15px 50px;
+}
+
+.media-element.selected {
+	border: solid rgb(0, 94, 255) 2px;
+}
+
+.media-element.onload {
+	cursor: default;
+}
+
+.media-element.onload img {
+	opacity: 0.6;
+}
+
+.text-onload {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 15px;
+	z-index: 3;
+	font-weight: 500;
+}
+
+.center {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.load-more {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	align-self: center;
+	margin-left: auto;
+	margin-right: auto;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
+	border: none;
+}
+
+.load-more:hover {
+	font-weight: 500;
+	box-shadow: 0px 0px 20px black;
+}
+
+.errDiv {
+	font-size: 18px;
+	width: max-content;
+	align-self: center;
+}
+
+#get10 {
+	font-size: 14px;
+	font-weight: 500;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: .25rem;
+}
+
+#get10:hover {
+	filter: brightness(95%);
+}
+
+#get10:active {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#notify-container {
+	position: absolute;
+	background-color: white;
+	z-index: 5;
+	top: 42px;
+	transform: translateX(-85%);
+	box-shadow: 3px 3px 5px black, -3px 5px 5px black;
+	min-width: 350px;
+	max-height: 400px;
+	overflow-y: auto;
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
+}
+
+#notify-container::-webkit-scrollbar {
+	display: none;
+}
+
+.div-header {
+	text-align: center;
+	border-bottom: 1px solid grey;
+	padding: 5px;
+}
+
+#notifyList {
+	list-style-type: none;
+}
+
+.notify-item {
+	display: flex;
+	gap: 20px;
+	font-size: 14px;
+	border-bottom: 1px solid rgba(128, 128, 128, .5);
+	align-items: center;
+	padding: 5px;
+}
+
+.time {
+	font-size: 12px;
+}
+
+#notify-clear {
+	color: red;
+	font-size: 12px;
+	font-weight: 500;
+	text-align: center;
+	border-top: 1px solid grey;
+	width: 100%;
+	padding: 5px;
+}
+
+#notify-clear:hover {
+	background-color: rgba(128, 128, 128, .3);
+	cursor: pointer;
+}
+
+#toast {
+	position: fixed;
+	right: 1%;
+	bottom: 2%;
+	background-color: rgba(144, 238, 144, 0.5);
+	/*background-color: rgba(255, 0, 0, 0.5);*/
+}
+
+.custom-tooltip {
+	white-space: nowrap;
+}
+
+/* Edit */
+
+.fade-out {
+	animation: fadeOut ease-in 4s;
+	-webkit-animation: fadeOut ease-in 4s;
+	-moz-animation: fadeOut ease-in 4s;
+	-o-animation: fadeOut ease-in 4s;
+	-ms-animation: fadeOut ease-in 4s;
+}
+
+@keyframes fadeOut {
+	0% {
+		color: red;
+	}
+	100% {
+		color: white;
+	}
+}
+
+#editor {
+	height: 100%;
+	width: 100%;
+	background-color: lightgrey;
+	border: 1px solid grey;
+}
+
+.transcriptions {
+	margin-top: 25px;
+}
+
+.box-rows {
+	margin-bottom: 25px;
+	margin-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.form-select:focus {
+	box-shadow: none !important;
+}
+
+/* textarea */
+.ta-hider {
+	width: 100%;
+}
+
+textarea {
+	width: 100%;
+	resize: none;
+}
+
+textarea#author:focus {
+	outline-color: blue;
+}
+
+textarea#title:focus {
+	outline-color: red;
+}
+
+textarea#note:focus {
+	outline-color: black;
+}
+
+textarea#collocation:focus {
+	outline-color: green;
+}
+
+#editErr-msg {
+	visibility: hidden;
+	width: 600px;
+}
+
+#command-bar {
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	padding: 3px;
+	background: black;
+	border-radius: 0.25em;
+	width: 600px;
+	position: relative;
+}
+
+#icons, #shortcuts {
+	display: contents;
+}
+
+.svg-wrap {
+	border: 3px solid transparent;
+	padding: 10px;
+	cursor: pointer;
+	margin: auto;
+}
+
+.svg-wrap:hover {
+	border: 3px solid white;
+}
+
+.icon {
+	width: 25px;
+	height: 25px;
+}
+
+.key-grid {
+	color: white;
+	font-weight: 500;
+	font-size: 12px;
+	text-align: center;
+	border-top: 1px solid white;
+	user-select: none;
+}
+
+.span-2 {
+	grid-column: span 2;
+}
+
+#short-btn {
+	position: absolute;
+	width: min-content;
+	height: min-content;
+	font-size: 14px;
+	color: white;
+	background: black;
+	border-radius: 0 0 0.25rem 0.25rem;
+	bottom: 0;
+	/*left: 249.5px;*/
+	left: 50%;
+	transform: translate(-50%, 100%);
+}
+
+.svg-wrap:active {
+	box-shadow: inset 0px 0px 20px white;
+}
+
+.active {
+	box-shadow: inset 0px 0px 20px white;
+}
+
+.caret {
+	width: 10px;
+	height: 10px;
+	align-self: center;
+	margin-left: 5px;
+}
+
+#editedImage {
+	margin-top: 40px;
+}
