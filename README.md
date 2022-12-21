@@ -10,14 +10,14 @@ La correzione delle segmentazione prevede i seguenti passaggi:
 5. Identificazione della etichette delle bounding box
 ## Analisi layout
 Su un piccolo campione di schede si sono calcolate:
-1. L'area delle scheda entro cui devono rientrare le scritte affinché vengano considerate per la trascrizione. Le box al di fuori di questo poligono vengono scartate.
-2. Le aree della scheda entro cui le bounding box devono rientrare per essere etichettate come autore, tiolo, collocazione o note.
-3. I centroidi di ciascun etichetta: corrispondono al punto medio dei centroidi delle bounding box del campione di studio. Servono per stabilire l'etichetta delle bounding box (che tendenzialmente è quella del centroide corrispondente più vicino).
+1. L'area dell'immagine entro cui devono rientrare le scritte affinché vengano considerate per la trascrizione. Le bounding box al di fuori di quest'area vengono scartate.
+2. Le aree dell'immagine entro cui le bounding box devono rientrare per essere etichettate come autore, titolo, collocazione o note.
+3. I centroidi di ciascun etichetta: corrispondono al punto medio dei centroidi delle bounding box del campione di studio appartenenti alla stessa etichetta. Servono per stabilire l'etichetta delle bounding box (che tendenzialmente è quella del centroide corrispondente più vicino).
 ## Istallazione ambiente
 1. Nella cartella principale installa Bootstrap (`npm install bootstrap@5.2.2` oppure visita https://getbootstrap.com/docs/5.2/getting-started/download/).
 2. Nella cartella _server_ installa l'ambiente python. Attivalo e installa Flask e le altre librerie:
   - $ python3 -m venv venv
-  - $ venv/bin/activate
+  - $ . venv/bin/activate
   - $ pip install Flask
   - $ pip install Flask-Cors
   - $ pip install Pillow
@@ -29,4 +29,4 @@ Su un piccolo campione di schede si sono calcolate:
 4. Salva il file JSON con la chiave del service account Google nella cartella *server/cred/*
 5. Carica le immagini delle schede nella cartella *all_caronti_cards*
 6. Attiva il back-end: `$ python3 app.py`
-7. Lancia l'app *index-html*
+7. Lancia l'app *index.html*
